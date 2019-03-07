@@ -6,13 +6,20 @@ const orderSchema = new Schema({
     enum: ['buy', 'sell'],
     required: true
   },
+  price: {
+    type: Number,
+    required: true
+  },
   product: {
     type: Schema.Types.ObjectId,
     ref: 'Product',
     required: true
   },
-  price: {
-    type: Number,
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
     required: true
   }
-});
+}, { collection: 'orderbook' });
+
+module.exports = model('Order', orderSchema);
