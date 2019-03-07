@@ -1,0 +1,16 @@
+{
+  "productSeed": [
+    {
+      "name": "product_1",
+      "desc": "product_1_desc"
+    },
+    {
+      "name": "product_2",
+      "desc": "product_2_desc"
+    },
+    {
+      "name": "product_3",
+      "desc": "product_3_desc"
+    }
+  ]
+}
