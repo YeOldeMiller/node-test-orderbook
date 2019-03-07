@@ -1,8 +1,8 @@
 require('dotenv').config();
 
 const express = require('express'),
-bodyParser = require('body-parser'),
-mongoose = require('mongoose');
+  bodyParser = require('body-parser'),
+  mongoose = require('mongoose');
 
 const app = express();
 
@@ -30,6 +30,6 @@ mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useFindAndModify: false
 })
-  .then(() => seedDB())
+  .then(seedDB)
   .then(() => app.listen(8080))
   .catch(console.log);
