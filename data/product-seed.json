@@ -1,16 +1,20 @@
 {
   "productSeed": [
     {
-      "name": "product_1",
-      "desc": "product_1_desc"
+      "name": "The One Ring",
+      "desc": "What have I got in my pocket?"
     },
     {
-      "name": "product_2",
-      "desc": "product_2_desc"
+      "name": "A Talking Skull",
+      "desc": "Don't trust the skull"
     },
     {
-      "name": "product_3",
-      "desc": "product_3_desc"
+      "name": "A Cardboard Box",
+      "desc": "Very inconspicuous"
+    },
+    {
+      "name": "Dummy Product",
+      "desc": "Move along, I'm just here for testing"
     }
   ]
 }

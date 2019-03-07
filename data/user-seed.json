@@ -1,19 +1,19 @@
 {
   "userSeed": [
     {
-      "name": "user_1",
-      "email": "user_1@test.com",
-      "password": "123456"
+      "name": "Bilbo Baggins",
+      "email": "baggins@shire.nz",
+      "password": "mellon"
     },
     {
-      "name": "user_2",
-      "email": "user_2@test.com",
-      "password": "234567"
+      "name": "The Nameless One",
+      "email": "thecorpse@mortuary.io",
+      "password": "thecage"
     },
     {
-      "name": "user_3",
-      "email": "user_3@test.com",
-      "password": "345678"
+      "name": "Solid Snake",
+      "email": "snake@foxhound.com",
+      "password": "48273"
     }
   ]
 }
