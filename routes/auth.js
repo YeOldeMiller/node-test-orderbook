@@ -3,7 +3,8 @@ const { Router } = require('express'),
   router = Router();
 
 const authController = require('../controllers/auth'),
-  User = require('../models/user');
+  User = require('../models/user'),
+  { doValidate } = require('../util/middleware');
 
 const userValidator = [
   body('email').normalizeEmail().isEmail().withMessage('Not a valid email')
@@ -19,7 +20,7 @@ const userValidator = [
   body('name').trim().not().isEmpty()
 ];
 
-router.put('/signup', userValidator, authController.signupUser);
+router.put('/signup', userValidator, doValidate, authController.signupUser);
 
 router.post('/login', authController.loginUser);
 
