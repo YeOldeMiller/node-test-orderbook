@@ -18,7 +18,8 @@ app.use((req, res, next) => {
 })
 
 app.use(require('./routes/auth'));
-// app.use('/feed', require('./routes/feed'));
+app.use('/product', require('./routes/products'));
+app.use('/orderbook', require('./routes/orderbook'));
 
 app.use((error, req, res, next) => {
   console.log(error);
@@ -30,6 +31,6 @@ mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useFindAndModify: false
 })
-  .then(seedDB)
-  .then(() => app.listen(8080))
+  // .then(seedDB)
+  .then(() => app.listen(process.env.PORT || 8080))
   .catch(console.log);

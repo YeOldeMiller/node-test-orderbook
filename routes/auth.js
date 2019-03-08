@@ -2,8 +2,9 @@ const { Router } = require('express'),
   { body } = require('express-validator/check'),
   router = Router();
 
-const authController = require('../controllers/auth'),
-  User = require('../models/user');
+const { signupUser, loginUser } = require('../controllers/auth'),
+  User = require('../models/user'),
+  { doValidate } = require('../util/middleware');
 
 const userValidator = [
   body('email').normalizeEmail().isEmail().withMessage('Not a valid email')
@@ -19,8 +20,8 @@ const userValidator = [
   body('name').trim().not().isEmpty()
 ];
 
-router.put('/signup', userValidator, authController.signupUser);
+router.put('/signup', userValidator, doValidate, signupUser);
 
-router.post('/login', authController.loginUser);
+router.post('/login', loginUser);
 
 module.exports = router;
