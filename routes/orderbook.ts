@@ -1,9 +1,10 @@
-const { Router } = require('express'),
-  { body } = require('express-validator/check'),
-  router = Router();
+import { Router } from 'express';
+import { body } from 'express-validator/check';
 
-const { getOrderbook, orderBuy, orderSell } = require('../controllers/orderbook'),
-  { routeOrder, isLoggedIn, isProductOwner, doValidate } = require('../util/middleware');
+import { getOrderbook, orderBuy, orderSell } from '../controllers/orderbook';
+import { routeOrder, isLoggedIn, isProductOwner, doValidate } from '../util/middleware';
+
+const router = Router();
 
 const orderValidator = [
   body('product').isMongoId().withMessage('Invalid product id'),
@@ -18,4 +19,4 @@ router.put('/', orderBuy);
 
 router.get('/', getOrderbook);
 
-module.exports = router;
+export default router;

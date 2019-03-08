@@ -1,10 +1,10 @@
-const { hash, compare } = require('bcryptjs'),
-  jwt = require('jsonwebtoken');
+import { hash, compare } from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
-const User = require('../models/user'),
-  AppError = require('../util/app-error');
+import User from '../models/user';
+import AppError from '../util/app-error';
 
-exports.signupUser = async (req, res, next) => {
+export const signupUser = async (req, res, next) => {
   try {
     const { email, name, password } = req.body,
       { _id } = User.create({ email, name, hash: await hash(password, 12) });
@@ -14,7 +14,7 @@ exports.signupUser = async (req, res, next) => {
   }
 };
 
-exports.loginUser = async (req, res, next) => {
+export const loginUser = async (req, res, next) => {
   try {
     const { email, password } = req.body,
       user = await User.findOne({ email });

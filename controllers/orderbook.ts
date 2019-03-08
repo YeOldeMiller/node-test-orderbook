@@ -1,8 +1,8 @@
-const Product = require('../models/product'),
-  Order = require('../models/order'),
-  AppError = require('../util/app-error');
+import Product from '../models/product';
+import Order from '../models/order';
+import AppError from '../util/app-error';
 
-exports.getOrderbook = async (req, res, next) => {
+export const getOrderbook = async (req, res, next) => {
   try{
     const page = req.query.page || 1,
       perPage = 5,
@@ -16,7 +16,7 @@ exports.getOrderbook = async (req, res, next) => {
   }
 };
 
-exports.orderSell = async (req, res, next) => {
+export const orderSell = async (req, res, next) => {
   try{
     const { price, product } = req.body;
     let order = await Order.findOne({ user: req.userId, product, type: 'sell' });
@@ -34,7 +34,7 @@ exports.orderSell = async (req, res, next) => {
   }
 };
 
-exports.orderBuy = async (req, res, next) => {
+export const orderBuy = async (req, res, next) => {
   try {
     const { product } = req.body,
       price = parseFloat(req.body.price),

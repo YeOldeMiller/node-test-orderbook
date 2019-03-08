@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon"
+    "build": "tsc",
+    "start": "nodemon -e ts -x \"tsc && node dist/app.js\""
   },
   "keywords": [],
   "author": "",
@@ -17,5 +18,9 @@
     "express-validator": "^5.3.1",
     "jsonwebtoken": "^8.5.0",
     "mongoose": "^5.4.17"
+  },
+  "devDependencies": {
+    "@types/node": "^11.10.5",
+    "typescript": "^3.3.3333"
   }
 }

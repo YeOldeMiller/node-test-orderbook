@@ -1,11 +1,11 @@
-const { Router } = require('express'),
-  { body, param } = require('express-validator/check'),
-  router = Router();
+import { Router } from 'express';
+import { body, param } from 'express-validator/check';
 
-const { getProducts, createProduct, updateProduct, deleteProduct } = require('../controllers/products'),
-  { doValidate, isLoggedIn, isProductOwner } = require('../util/middleware');
+import { getProducts, createProduct, updateProduct, deleteProduct } from '../controllers/products';
+import { doValidate, isLoggedIn, isProductOwner } from '../util/middleware';
 
-const productValidator = [
+const router = Router(),
+  productValidator = [
   body('name').trim().isLength({ min: 3 }).withMessage('Name must be at least 3 characters long'),
   body('desc').trim().not().isEmpty().withMessage('Description must not be empty')
 ],
@@ -19,4 +19,4 @@ router.put('/:productId', idValidator, productValidator, doValidate, isLoggedIn,
 
 router.delete('/:productId', idValidator, doValidate, isLoggedIn, isProductOwner, deleteProduct);
 
-module.exports = router;
+export default router;

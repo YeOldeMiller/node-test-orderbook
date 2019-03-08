@@ -1,5 +1,4 @@
-const { Schema, model } = require('mongoose'),
-  bcrypt = require('bcryptjs');
+import { Schema, model } from 'mongoose';
 
 const userSchema = new Schema({
   email: {
@@ -20,4 +19,4 @@ const userSchema = new Schema({
   }
 });
 
-module.exports = model('User', userSchema);
+export default model('User', userSchema);

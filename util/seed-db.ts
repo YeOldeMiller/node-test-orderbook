@@ -1,18 +1,18 @@
-const { readFile } = require('fs'),
-  { promisify } = require('util'),
-  path = require('path'),
-  readFileAsync = promisify(readFile);
+import { readFile } from 'fs';
+import { promisify } from 'util';
+import path from 'path';
 
-const { hash } = require('bcryptjs');
+import { hash } from 'bcryptjs';
 
-const User = require('../models/user'),
-  Product = require('../models/product');
-  
+import User from '../models/user';
+import Product from '../models/product';
 
-module.exports = async () => {
+const readFileAsync = promisify(readFile);
+
+export default async () => {
   try {
-    let { userSeed } = JSON.parse(await readFileAsync(path.join(__dirname, '..', 'data', 'user-seed.json'))),
-      { productSeed } = JSON.parse(await readFileAsync(path.join(__dirname, '..', 'data', 'product-seed.json')));
+    let { userSeed } = JSON.parse(await readFileAsync(path.join(__dirname, '..' , '..', 'data', 'user-seed.json'), 'utf8')),
+      { productSeed } = JSON.parse(await readFileAsync(path.join(__dirname, '..', '..', 'data', 'product-seed.json'), 'utf8'));
     if(!userSeed || !productSeed) throw new Error('No seed data to populate database');
     userSeed.length = productSeed.length = Math.min(userSeed.length, productSeed.length);
 
@@ -23,7 +23,7 @@ module.exports = async () => {
     const users = await User.insertMany(userSeed);
     
     productSeed = productSeed.map((product, index) => ({ ...product, owner_id: users[index]._id, initial: true }));
-    const products = await Product.insertMany(productSeed);
+    await Product.insertMany(productSeed);
 
     console.log('Database repopulated');
   } catch(err) {

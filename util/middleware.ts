@@ -1,16 +1,16 @@
-const jwt = require('jsonwebtoken'),
-  { validationResult } = require('express-validator/check');
+import jwt from 'jsonwebtoken';
+import { validationResult } from 'express-validator/check';
 
 const Product = require('../models/product'),
   AppError = require('./app-error');
 
-exports.doValidate = (req, res, next) => {
+export const doValidate = (req, res, next) => {
   const errors = validationResult(req).formatWith((({ msg }) => msg));
   if(!errors.isEmpty()) throw new AppError(errors.array().join(', '), 422);
   next();
 };
 
-exports.isLoggedIn = (req, res, next) => {
+export const isLoggedIn = (req, res, next) => {
   const authHeader = req.get('Authorization');
   if(authHeader) {
     let token;
@@ -27,7 +27,7 @@ exports.isLoggedIn = (req, res, next) => {
   throw new AppError('Not authenticated', 401);
 };
 
-exports.isProductOwner = async (req, res, next) => {
+export const isProductOwner = async (req, res, next) => {
   try{
     const productId = req.params.productId || req.body.product;
     const product = await Product.findById(productId);
@@ -39,7 +39,7 @@ exports.isProductOwner = async (req, res, next) => {
   }
 };
 
-exports.routeOrder = (req, res, next) => {
+export const routeOrder = (req, res, next) => {
   const { type } = req.body;
   if(type === 'sell') return next();
   else if(type === 'buy') return next('route');

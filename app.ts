@@ -1,12 +1,16 @@
 require('dotenv').config();
 
-const express = require('express'),
-  bodyParser = require('body-parser'),
-  mongoose = require('mongoose');
+import express from 'express';
+import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
+
+import authRoutes from './routes/auth';
+import productRoutes from './routes/products';
+import orderRoutes from './routes/orderbook';
+
+import seedDB from './util/seed-db';
 
 const app = express();
-
-const seedDB = require('./util/seed-db');
 
 app.use(bodyParser.json());
 
@@ -17,9 +21,9 @@ app.use((req, res, next) => {
   next();
 })
 
-app.use(require('./routes/auth'));
-app.use('/product', require('./routes/products'));
-app.use('/orderbook', require('./routes/orderbook'));
+app.use(authRoutes);
+app.use('/product', productRoutes);
+app.use('/orderbook', orderRoutes);
 
 app.use((error, req, res, next) => {
   console.log(error);
@@ -31,6 +35,9 @@ mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useFindAndModify: false
 })
-  // .then(seedDB)
-  .then(() => app.listen(process.env.PORT || 8080))
+  .then(seedDB)
+  .then(() => {
+    app.listen(process.env.PORT || 8080);
+    console.log('Listening on port ' + (process.env.PORT || 8080));
+  })
   .catch(console.log);
