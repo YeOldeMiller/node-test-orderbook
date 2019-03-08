@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken';
 import { validationResult } from 'express-validator/check';
 
-const Product = require('../models/product'),
-  AppError = require('./app-error');
+import Product from '../models/product';
+import AppError from './app-error';
 
 export const doValidate = (req, res, next) => {
   const errors = validationResult(req).formatWith((({ msg }) => msg));
