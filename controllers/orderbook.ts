@@ -40,7 +40,7 @@ export const orderBuy = async (req, res, next) => {
       price = parseFloat(req.body.price),
       foundProduct = await Product.findById(product);
     if(foundProduct.owner_id.toString() === req.userId.toString()) throw new AppError('You already own this product', 403);
-    const offer = await Order.findOne({ product, type: 'sell' }).sort({ price: 1 }).limit(1);
+    const offer = await Order.findOne({ product, type: 'sell' }).sort({ price: 1 });
     if(!offer) throw new AppError('No sale offers found', 404);
     if(price > offer.price) throw new AppError('Listed price exceeded', 403);
     let order = await Order.findOne({ user: req.userId, product, type: 'buy' });
